@@ -36,6 +36,28 @@ class Matter1Iterator(Iterator):
         self._students = sorted(students, key=lambda x: x.n1, reverse=True)
         self._index = 0
 
+class Matter2Iterator(Iterator):
+    def __init__(self, students):
+        self._students = sorted(students, key=lambda x: x.n2, reverse=True)
+        self._index = 0
+    def __next__(self):
+        if self._index < len(self._students):
+            res = self._students[self._index]
+            self._index += 1
+            return res
+        raise StopIteration
+
+class Matter3Iterator(Iterator):
+    def __init__(self, students):
+        self._students = sorted(students, key=lambda x: x.n3, reverse=True)
+        self._index = 0
+    def __next__(self):
+        if self._index < len(self._students):
+            res = self._students[self._index]
+            self._index += 1
+            return res
+        raise StopIteration
+
     def __next__(self):
         if self._index < len(self._students):
             res = self._students[self._index]
@@ -62,6 +84,16 @@ if __name__ == "__main__":
     school_class.add_student(Student('A', 8, 2, 17))
     school_class.add_student(Student('V', 9, 14, 14))
     
+    print("\n--- Parcours Matière 2 ---")
+    it2 = Matter2Iterator(school_class.students)
+    for s in it2:
+        print(f"{s.name}: {s.n2}")
+
+    print("\n--- Parcours Matière 3 ---")
+    it3 = Matter3Iterator(school_class.students)
+    for s in it3:
+        print(f"{s.name}: {s.n3}")
+        
     print("\n--- Parcours via Iterator (Matière 1) ---")
     for student in school_class:
         print(f"{student.name}: {student.n1}")
