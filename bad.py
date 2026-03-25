@@ -93,7 +93,19 @@ if __name__ == "__main__":
     it3 = Matter3Iterator(school_class.students)
     for s in it3:
         print(f"{s.name}: {s.n3}")
-        
+
     print("\n--- Parcours via Iterator (Matière 1) ---")
     for student in school_class:
         print(f"{student.name}: {student.n1}")
+
+        def add_fourth_matter(cls):
+    orig_init = cls.__init__
+    def __init__(self, name, n1, n2, n3, n4=0):
+        orig_init(self, name, n1, n2, n3)
+        self.n4 = n4
+    cls.__init__ = __init__
+    return cls
+
+@add_fourth_matter
+class Student:
+    # ... (garde ton code existant ici)
