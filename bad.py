@@ -109,3 +109,21 @@ if __name__ == "__main__":
 @add_fourth_matter
 class Student:
     # ... (garde ton code existant ici)
+
+    class Matter4Iterator(Iterator):
+    def __init__(self, students):
+        self._students = sorted(students, key=lambda x: x.n4, reverse=True)
+        self._index = 0
+    def __next__(self):
+        if self._index < len(self._students):
+            res = self._students[self._index]
+            self._index += 1
+            return res
+        raise StopIteration
+
+# Dans le bloc main pour tester :
+    school_class.add_student(Student('New', 10, 10, 10, 18)) # Étudiant avec n4
+    it4 = Matter4Iterator(school_class.students)
+    print("\n--- Parcours Matière 4 ---")
+    for s in it4:
+        print(f"{s.name}: {s.n4}")
